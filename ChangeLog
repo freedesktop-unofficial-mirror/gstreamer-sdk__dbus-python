@@ -1,3 +1,54 @@
+commit f6066573d25508f5cbbc5c12254086d419bb8828
+Author: Simon McVittie <simon.mcvittie@collabora.co.uk>
+Date:   2012-06-25 17:01:51 +0100
+
+    fd.o #40817: validate UTF-8 according to the same rules as libdbus
+
+ NEWS                            |    8 +++
+ _dbus_bindings/message-append.c |  102 ++++++++++++++++++++++++++++-----------
+ configure.ac                    |    4 ++
+ test/test-standalone.py         |   59 +++++++++++++++++++++-
+ 4 files changed, 143 insertions(+), 30 deletions(-)
+
+commit 4a0f4379d4a5783d576aec90019a39459eff007d
+Author: Simon McVittie <simon.mcvittie@collabora.co.uk>
+Date:   2012-06-05 19:39:20 +0100
+
+    NEWS
+
+ NEWS |    7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
+
+commit 6ff89bf0d05a550cf1aff2053579fc1f0192cd97
+Author: Simon McVittie <simon.mcvittie@collabora.co.uk>
+Date:   2012-06-05 19:07:51 +0100
+
+    Py3: correctly guess the signature of ObjectPath(...) and Signature(...)
+    
+    Under Python 2, ObjectPath and Signature are subtypes of str (= bytes),
+    and the existing type-guessing worked.
+    
+    The type-guessing code assumed that all unicode objects were just
+    strings, but that assumption became false in the Python 3 port:
+    ObjectPath and Signature are still subtypes of str, but str now means
+    unicode, not bytes.
+    
+    Bug: https://bugs.freedesktop.org/show_bug.cgi?id=50740
+
+ _dbus_bindings/message-append.c |   14 ++++++++++++--
+ test/test-standalone.py         |    2 ++
+ 2 files changed, 14 insertions(+), 2 deletions(-)
+
+commit 2f08b9e644c8530c4d324c4bd9d8a0cdb24edc92
+Author: Simon McVittie <simon.mcvittie@collabora.co.uk>
+Date:   2012-05-09 17:50:59 +0100
+
+    Back to unreleased status
+
+ NEWS         |    5 +++++
+ configure.ac |    2 +-
+ 2 files changed, 6 insertions(+), 1 deletion(-)
+
 commit 4a4bce958b3257b7cb2adc050022879660aface1
 Author: Simon McVittie <simon.mcvittie@collabora.co.uk>
 Date:   2012-05-09 15:47:48 +0100

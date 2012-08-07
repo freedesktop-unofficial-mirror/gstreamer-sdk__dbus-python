@@ -6,7 +6,7 @@ m4_define(dbus_python_released, 1)
 dnl The dbus-python version number (must actually be numeric at the moment)
 m4_define(dbus_python_major_version, 1)
 m4_define(dbus_python_minor_version, 1)
-m4_define(dbus_python_micro_version, 0)
+m4_define(dbus_python_micro_version, 1)
 
 m4_define(dbus_python_maybe_datestamp,
           m4_esyscmd([if test x]dbus_python_released[ != x1; then date +.%Y%m%d | tr -d '\n\r'; fi]))
@@ -158,9 +158,13 @@ PKG_CHECK_MODULES(DBUS, [dbus-1 >= 1.4])
 PKG_CHECK_MODULES(DBUS_GLIB, [dbus-glib-1 >= 0.70])
 
 dbuspy_save_CFLAGS="$CFLAGS"
+dbuspy_save_LIBS="$LIBS"
 CFLAGS="$CFLAGS $DBUS_CFLAGS"
+LIBS="$CFLAGS $DBUS_LIBS"
 AC_CHECK_TYPES([DBusBasicValue], [], [], [#include <dbus/dbus.h>])
+AC_CHECK_FUNCS([dbus_validate_utf8])
 CFLAGS="$dbuspy_save_CFLAGS"
+LIBS="$dbuspy_save_LIBS"
 
 TP_COMPILER_WARNINGS([CFLAGS_WARNINGS], [test] dbus_python_released [= 0],
   [all \
